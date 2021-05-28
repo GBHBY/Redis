@@ -123,7 +123,7 @@ public class Pms implements Serializable {
         sb.append(", org=").append(org);
         sb.append(", time=").append(time);
         sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
+        sb.append("] ");
         return sb.toString();
     }
 }
