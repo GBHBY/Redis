@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.redis.mapper.RedisMapper">
+ <cache type="com.example.redis.config.RedisCache"/>
+    <resultMap id="map1" type="com.example.redis.bean.RedisBean">
+        <id column="price" jdbcType="INTEGER" property="price" />
+        <result column="cname" jdbcType="VARCHAR" property="cName" />
+        <result column="pname" jdbcType="VARCHAR" property="pName" />
+    </resultMap>
+
+  <select id="listPC" resultMap="map1">
+      select
+            c.price,
+            c.cname ,
+            p.name pname
+            from commodity c left join pms p on p.category = c.category
+  </select>
+
+
+</mapper>
