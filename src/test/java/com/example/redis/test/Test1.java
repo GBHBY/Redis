@@ -36,63 +36,6 @@ import static java.util.Locale.CHINESE;
 @SpringBootTest(classes = RedisApplication.class)
 @RunWith(SpringJUnit4ClassRunner.class)
 public class Test1 {
-    Logger logger = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
-    @Autowired
-    private RedisDataService redisDataService;
-    @Autowired
-    private RedisTemplate redisTemplate;
-    @Autowired
-    private PmsDao pmsDao;
-
-
-    @Before
-    public void init() {
-        redisTemplate.setKeySerializer(new StringRedisSerializer());
-        redisTemplate.setHashKeySerializer(new StringRedisSerializer());
-        redisTemplate.setHashValueSerializer(new GenericJackson2JsonRedisSerializer());
-        redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer());
-        redisTemplate.setDefaultSerializer(new Jackson2JsonRedisSerializer(Object.class));
-        logger.info("redis init over");
-    }
-
-
-    @Test
-    public void test1() {
-        String a = "-184533780:3209450700:com.example.redis.mapper.RedisMapper.listPC:0:2147483647:select\n" +
-                "            c.price,\n" +
-                "            c.cname ,\n" +
-                "            p.name pname\n" +
-                "            from commodity c left join pms p on p.category = c.category:SqlSessionFactoryBean";
-        String[] split = a.split(":");
-        for (int i = 0; i < split.length; i++) {
-            System.out.println(split[i]);
-        }
-    }
-
-    @Test
-    public void test2() {
-        Set<String> keys = redisTemplate.keys("*");
-        for (String key : keys) {
-            redisTemplate.delete(key);
-        }
-    }
-
-    @Test
-    public void testTime() throws ParseException {
-        Pms pms = new Pms();
-        pms.setOrg(434);
-        Date date = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", CHINESE);
-        String format1 = format.format(date);
-        System.out.println(format1 + "------");
-        pms.setTime(date);
-        System.out.println(pms.getTime() + "========");
-        PmsExample example = new PmsExample();
-        PmsExample.Criteria criteria = example.createCriteria();
-
-        pmsDao.updateByExampleSelective(pms, example);
-
-    }
 
 
 }
